@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  asset_type: MyString
+  asset_tag: MyString
+  serial_nr: MyString
+  po: MyString
+  po_date: 2015-02-01
+  price: 9.99
+  lifecycle: 1
+  make: MyString
+  model: MyString
+  is_used: false
+  is_assigned: false
+  is_supported: false
+
+two:
+  asset_type: MyString
+  asset_tag: MyString
+  serial_nr: MyString
+  po: MyString
+  po_date: 2015-02-01
+  price: 9.99
+  lifecycle: 1
+  make: MyString
+  model: MyString
+  is_used: false
+  is_assigned: false
+  is_supported: false

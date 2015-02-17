@@ -1,0 +1,29 @@
+
+
+<p>
+  <strong>Date:</strong>
+  <%= @transfer.date %>
+</p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @transfer.asset.asset_tag + ' | ' + @transfer.asset.make + ' ' + @transfer.asset.model %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @transfer.employee.name %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @transfer.location.site_code %>
+</p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @transfer.room %>
+</p>
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>

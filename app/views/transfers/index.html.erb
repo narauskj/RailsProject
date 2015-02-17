@@ -1,0 +1,39 @@
+
+
+<h1>Listing Transfers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Asset</th>
+      <th>Type</th>
+      <th>Make & Model</th>
+      <th>Employee</th>
+      <th>Location</th>
+      <th>Room</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transfers.each do |transfer| %>
+      <tr>
+        <td><%= transfer.date %></td>
+        <td><%= transfer.asset.asset_tag %></td>
+        <td><%= transfer.asset.asset_type %></td>
+        <td><%= transfer.asset.make + ' ' + transfer.asset.model %></td>
+        <td><%= transfer.employee.name %></td>
+        <td><%= transfer.location.site_code %></td>
+        <td><%= transfer.room %></td>
+        <td><%= link_to 'Show', transfer %></td>
+        <td><%= link_to 'Edit', edit_transfer_path(transfer) %></td>
+        <td><%= link_to 'Destroy', transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Transfer', new_transfer_path %>

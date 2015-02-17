@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @asset.asset_type %>
+</p>
+
+<p>
+  <strong>Asset #:</strong>
+  <%= @asset.asset_tag %>
+</p>
+
+<p>
+  <strong>S/N:</strong>
+  <%= @asset.serial_nr %>
+</p>
+
+<p>
+  <strong>PO:</strong>
+  <%= @asset.po %>
+</p>
+
+<p>
+  <strong>PO Date:</strong>
+  <%= @asset.po_date %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @asset.price.round(2) %>
+</p>
+
+<p>
+  <strong>Lifecycle:</strong>
+  <%= @asset.lifecycle %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @asset.value %>
+</p>
+
+<p>
+  <strong>Make:</strong>
+  <%= @asset.make %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @asset.model %>
+</p>
+
+<p>
+  <strong>Is used:</strong>
+  <%= @asset.is_used %>
+</p>
+
+<p>
+  <strong>Is assigned:</strong>
+  <%= @asset.is_assigned %>
+</p>
+
+<p>
+  <strong>Is supported:</strong>
+  <%= @asset.is_supported %>
+</p>
+
+<%= link_to 'Edit', edit_asset_path(@asset) %> |
+<%= link_to 'Back', assets_path %>
