@@ -1,7 +1,8 @@
 class Employee < ActiveRecord::Base
 	has_many :transfers
 	belongs_to :location
-	validates :name, presence:true
-	validates :email, presence:true
-	validates :location_id, presence:true,  numericality: { only_integer: true }
+	validates :name, :email, :location_id, presence:true
+	validates :username, :email, uniqueness:true
+	validates :location_id, numericality: { only_integer: true }
 end
+
