@@ -27,7 +27,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @asset.price.round(2) %>
+  €<%= number_with_precision(@asset.price, :precision => 2) %>
 </p>
 
 <p>
@@ -37,7 +37,7 @@
 
 <p>
   <strong>Value:</strong>
-  <%= @asset.value %>
+  €<%= number_with_precision(@asset.value, :precision => 2) %>
 </p>
 
 <p>
@@ -49,6 +49,24 @@
   <strong>Model:</strong>
   <%= @asset.model %>
 </p>
+
+<p>
+  <strong>Assigned to:</strong>
+  <%= if @asset.transfers.last
+ 			@asset.transfers.last.employee.name  
+	  else 
+	  		'Not assigned'
+   end %>
+</p>
+<p>
+  <strong>Last location:</strong>
+  <%= if @asset.transfers.last
+ 			@asset.transfers.last.location.country + ' ' +  @asset.transfers.last.location.city + ' ' + @asset.transfers.last.location.site_code   
+	  else 
+	  		'Not assigned'
+   end %>
+</p>
+
 
 <p>
   <strong>Is used:</strong>
