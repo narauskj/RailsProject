@@ -1,29 +1,34 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @employee.username %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @employee.name %>
-</p>
-
-<p>
-  <strong>Job title:</strong>
-  <%= @employee.job_title %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @employee.email %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @employee.location.site_code %>
-</p>
-
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong>Username</strong></td>
+      <td> <%= @employee.username %></td>
+    </tr>
+    <tr>
+      <td><strong>Full Name</strong></td>
+      <td> <%= @employee.name %></td>
+    </tr>  
+    <tr>
+      <td><strong>Job Title</strong></td>
+      <td> <%= @employee.job_title %></td>
+    </tr>            
+    <tr>
+      <td><strong>Email</strong></td>
+      <td> <%= @employee.email %></td>
+    </tr>            
+    <tr>
+      <td><strong>Location</strong></td>
+      <td> <%= @employee.location.site_code %></td>
+    </tr>   
+</table>    
+</div>   
+<br>
+<div align=center>
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>
+</div>

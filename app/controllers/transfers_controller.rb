@@ -4,7 +4,7 @@ class TransfersController < ApplicationController
   # GET /transfers
   # GET /transfers.json
   def index
-    @transfers = Transfer.all
+    @transfers = Transfer.paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /transfers/1

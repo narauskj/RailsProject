@@ -1,24 +1,31 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @location.country %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
-
-<p>
-  <strong>Site code:</strong>
-  <%= @location.site_code %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @location.address %>
-</p>
-
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong>Country</strong></td>
+      <td> <%= @location.country %></td>
+    </tr>
+    <tr>
+      <td><strong>City</strong></td>
+      <td> <%= @location.city %></td>
+    </tr>  
+    <tr>
+      <td><strong>Site code</strong></td>
+      <td> <%= @location.site_code %></td>
+    </tr>            
+    <tr>
+      <td><strong>Address</strong></td>
+      <td> <%= @location.address %></td>
+    </tr>            
+  
+</table>    
+</div> 
+<br>
+<div align=center>
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
+</div>

@@ -10,25 +10,32 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country  %>
-
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :site_code %><br>
-    <%= f.text_field :site_code %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
-  </div>
-  <div class="actions">
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong>Country</strong></td>
+      <td><%= f.text_field :country  %></td>
+    </tr>
+    <tr>
+      <td><strong>City</strong></td>
+      <td><%= f.text_field :city  %></td>
+    </tr>
+    <tr>
+      <td><strong>Site Code</strong></td>
+      <td><%= f.text_field :site_code  %></td>
+    </tr>
+    <tr>
+      <td><strong>Address</strong></td>
+      <td><%= f.text_area :address  %></td>
+    </tr>
+</table>
+</div>  
+<br>  
+  <div class="actions" align=center>
     <%= f.submit %>
   </div>
 <% end %>

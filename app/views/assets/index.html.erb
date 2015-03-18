@@ -5,7 +5,11 @@
 
 <%= link_to 'New Asset', new_asset_path %>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @assets %>
 <br>
+</div>
+
 <div class="table_normal">
 <table>
     <tr>
@@ -59,5 +63,9 @@
 </table>
 </div>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @assets %>
+<br>
+</div>
 
 <%= link_to 'New Asset', new_asset_path %>

@@ -10,28 +10,37 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :asset_id %><br>
-    <%= f.collection_select(:asset_id, Asset.all, :id, :asset_tag) %>
-  </div>
-  <div class="field">
-    <%= f.label :employee_id %><br>
-    <%= f.collection_select(:employee_id, Employee.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :location_id %><br>
-    <%= f.collection_select(:location_id, Location.all, :id, :site_code) %>
-  </div>
-  <div class="field">
-    <%= f.label :room %><br>
-    <%= f.text_field :room %>
-  </div>
-  <div class="actions">
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+    	<td><strong>Date</strong></td>
+    	<td><%=  f.date_field :date %></td>
+    </tr>
+    <tr>
+    	<td><strong>Asset #</strong></td>
+    	<td> <%= f.collection_select(:asset_id, Asset.all, :id, :asset_tag,{:prompt => 'Select'}) %></td>
+    </tr>
+	    <tr>
+    	<td><strong>Employee</strong></td>
+    	<td> <%= f.collection_select(:employee_id, Employee.all, :id, :name,{:prompt => 'Select'}) %></td>
+    </tr>
+	    <tr>
+    	<td><strong>Location</strong></td>
+    	<td><%= f.collection_select(:location_id, Location.all, :id, :site_code,{:prompt => 'Select'}) %></td>
+    </tr>
+    </tr>
+	    <tr>
+    	<td><strong>Room/Desk Nr.</strong></td>
+    	<td><%= f.text_field :room %></td>
+    </tr>
+</table>
+</div>
+<br>
+  <div class="actions" align=center>
     <%= f.submit %>
   </div>
 <% end %>

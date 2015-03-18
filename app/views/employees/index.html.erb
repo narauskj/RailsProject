@@ -4,7 +4,11 @@
 <br>
 <%= link_to 'New Employee', new_employee_path %>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @employees %>
 <br>
+</div>
+
 <div class="table_normal">
 <table>
  
@@ -33,5 +37,9 @@
 </table>
 </div>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @employees %>
+<br>
+</div>
 
 <%= link_to 'New Employee', new_employee_path %>

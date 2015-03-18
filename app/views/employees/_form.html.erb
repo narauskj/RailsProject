@@ -10,28 +10,38 @@
       </ul>
     </div>
   <% end %>
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong>Username</strong></td>
+      <td><%= f.text_field :username, :size=>"50" %></td>
+    </tr>
+    <tr>
+      <td><strong>Full Name</strong></td>
+      <td> <%= f.text_field :name, :size=>"50"  %></td>
+    </tr>
+    <tr>
+      <td><strong>Job Title</strong></td>
+      <td> <%= f.text_field :job_title, :size=>"50" %></td>
+    </tr>
+    <tr>
+      <td><strong>Email</strong></td>
+      <td><%= f.text_field :email, :size=>"50" %></td>
+    </tr>
+    <tr>
+      <td><strong>Default location</strong></td>
+      <td><%= f.collection_select(:location_id, Location.all, :id, :site_code) %></td>
+    </tr>
+</table>
+</div>       
 
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :job_title %><br>
-    <%= f.text_field :job_title %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :location_id %><br>
-    <%= f.collection_select(:location_id, Location.all, :id, :site_code) %>
-  </div>
-  <div class="actions">
+<br>
+
+  <div class="actions" align=center>
     <%= f.submit %>
   </div>
 <% end %>

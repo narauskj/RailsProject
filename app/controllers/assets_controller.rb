@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.json
   def index
-    @assets = Asset.all
+    @assets = Asset.paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /assets/1

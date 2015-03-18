@@ -1,87 +1,79 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @asset.asset_type %>
-</p>
+<h1>Displaying asset <%= @asset.asset_tag  %></h1>
+<br>
+<br>
 
-<p>
-  <strong>Asset #:</strong>
-  <%= @asset.asset_tag %>
-</p>
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong>Type</strong></td>
+      <td> <%= @asset.asset_type %></td>
+    </tr>      
+    <tr>
+      <td><strong>Asset #</strong></td>
+      <td> <%= @asset.asset_tag %></td>
+    </tr>  
+    <tr>
+      <td><strong>S/N</strong></td>
+      <td> <%= @asset.serial_nr %></td>
+    </tr>
+    <tr>
+      <td><strong>Make</strong></td>
+      <td> <%= @asset.make %></td>
+    </tr>
+    <tr>
+      <td><strong>Model</strong></td>
+      <td> <%= @asset.model %></td>
+    </tr>
 
-<p>
-  <strong>S/N:</strong>
-  <%= @asset.serial_nr %>
-</p>
+    <tr>
+      <td><strong>PO</strong></td>
+      <td> <%= @asset.po %></td>
+    </tr>
+    <tr>
+      <td><strong>Purchase date</strong></td>
+      <td> <%= @asset.po_date %></td>
+    </tr>
+    <tr>
+      <td><strong>Price</strong></td>
+      <td> €<%= number_with_precision(@asset.price, :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>Lifecycle period (months)</strong></td>
+      <td> <%= @asset.lifecycle %></td>
+    </tr>
+    <tr>
+      <td><strong>Remaining value</strong></td>
+      <td>€<%= number_with_precision(@asset.value, :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>Assigned to</strong></td>
+      <td><%= if @asset.transfers.last
+ 					@asset.transfers.last.employee.name  
+	  		  else 
+	  				'Not assigned'
+   			  end %></td>
+    </tr>
+    <tr>
+      <td><strong>Last location</strong></td>
+      <td><%= if @asset.transfers.last
+ 				@asset.transfers.last.location.country + ' ' +  @asset.transfers.last.location.city + ' ' + @asset.transfers.last.location.site_code   
+	  		  else 
+	  			'Not assigned'
+   		      end %></td>
+    </tr>
+        
+      
+</table>    
+</div>    
 
-<p>
-  <strong>PO:</strong>
-  <%= @asset.po %>
-</p>
-
-<p>
-  <strong>PO Date:</strong>
-  <%= @asset.po_date %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  €<%= number_with_precision(@asset.price, :precision => 2) %>
-</p>
-
-<p>
-  <strong>Lifecycle:</strong>
-  <%= @asset.lifecycle %>
-</p>
-
-<p>
-  <strong>Value:</strong>
-  €<%= number_with_precision(@asset.value, :precision => 2) %>
-</p>
-
-<p>
-  <strong>Make:</strong>
-  <%= @asset.make %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @asset.model %>
-</p>
-
-<p>
-  <strong>Assigned to:</strong>
-  <%= if @asset.transfers.last
- 			@asset.transfers.last.employee.name  
-	  else 
-	  		'Not assigned'
-   end %>
-</p>
-<p>
-  <strong>Last location:</strong>
-  <%= if @asset.transfers.last
- 			@asset.transfers.last.location.country + ' ' +  @asset.transfers.last.location.city + ' ' + @asset.transfers.last.location.site_code   
-	  else 
-	  		'Not assigned'
-   end %>
-</p>
-
-
-<p>
-  <strong>Is used:</strong>
-  <%= @asset.is_used %>
-</p>
-
-<p>
-  <strong>Is assigned:</strong>
-  <%= @asset.is_assigned %>
-</p>
-
-<p>
-  <strong>Is supported:</strong>
-  <%= @asset.is_supported %>
-</p>
-
+<br>
+<div align=center>
 <%= link_to 'Edit', edit_asset_path(@asset) %> |
 <%= link_to 'Back', assets_path %>
+</div>

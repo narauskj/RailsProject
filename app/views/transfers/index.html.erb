@@ -4,7 +4,11 @@
 <br>
 <%= link_to 'New Transfer', new_transfer_path %>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @transfers %>
 <br>
+</div>
+
 <div class="table_normal">
 <table>
 
@@ -16,7 +20,7 @@
       <td>Employee</td>
       <td>Location</td>
       <td>Room</td>
-      <td colspan="3">Actions</td>
+      <td colspan="2">Actions</td>
     </tr>
 
     <% @transfers.each do |transfer| %>
@@ -29,7 +33,6 @@
         <td><%= transfer.location.site_code %></td>
         <td><%= transfer.room %></td>
         <td><%= link_to 'Show', transfer %></td>
-        <td><%= link_to 'Edit', edit_transfer_path(transfer) %></td>
         <td><%= link_to 'Del', transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -37,5 +40,9 @@
 </table>
 </div>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @transfers %>
+<br>
+</div>
 
 <%= link_to 'New Transfer', new_transfer_path %>

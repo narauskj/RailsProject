@@ -9,7 +9,7 @@ class Asset < ActiveRecord::Base
 	
 		
 	ASSET_TYPES = ['Laptop','Desktop','Server','Monitor','UPS','Battery','Switch']
-	LIFECYLE_MONTHS = ['12','24','36','48']
+	LIFECYLE_MONTHS = ['12','24','36','48','60','72']
 	
 	def value
 		if self.price? & self.lifecycle?

@@ -4,7 +4,11 @@
 <br>
 <%= link_to 'New Location', new_location_path %>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @locations %>
 <br>
+</div>
+
 <div class="table_normal">
 <table>
 
@@ -33,5 +37,9 @@
 </table>
 </div>
 <br>
+<div class='flickr_pagination'>
+<%= will_paginate @locations %>
+<br>
+</div>
 
 <%= link_to 'New Location', new_location_path %>

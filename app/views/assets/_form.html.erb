@@ -11,60 +11,60 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :asset_type %><br>
-    <%= f.collection_select :asset_type, Asset::ASSET_TYPES, :to_s, :to_s, :include_blank => true %>
-  </div>
-  <div class="field">
-    <%= f.label :asset_tag %><br>
-    <%= f.text_field :asset_tag %>
-  </div>
-  <div class="field">
-    <%= f.label :serial_nr %><br>
-    <%= f.text_field :serial_nr %>
-  </div>
-  <div class="field">
-    <%= f.label :po %><br>
-    <%= f.text_field :po %>
-  </div>
-  <div class="field">
-    <%= f.label :po_date %><br>
-    <%= f.date_select :po_date %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :lifecycle %><br>
-    <%= f.collection_select :lifecycle, Asset::LIFECYLE_MONTHS, :to_i, :to_i, :include_blank => true  %>
-  </div>
-  <div class="field">
-    <%= f.label :make %><br>
-    <%= f.text_field :make %>
-  </div>
-  <div class="field">
-    <%= f.label :model %><br>
-    <%= f.text_field :model %>
-  </div>
-  <div class="field">
-    <%= f.label :is_used %><br>
-    <%= f.check_box :is_used %>
-  </div>
-  <div class="field">
-    <%= f.label :is_assigned %><br>
-    <%= f.check_box :is_assigned %>
-  </div>
-  <div class="field">
-    <%= f.label :is_supported %><br>
-    <%= f.check_box :is_supported %>
-  </div>
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong><%= f.label :asset_type %></strong></td>
+      <td> <%= f.collection_select :asset_type, Asset::ASSET_TYPES, :to_s, :to_s, :include_blank => false %></td>
+    </tr>      
+    <tr>
+      <td><strong>Asset #</strong></td>
+      <td> <%= f.text_field :asset_tag, :size=>"50" %></td>
+    </tr>    
+    <tr>
+      <td><strong>Serial #</strong></td>
+      <td> <%= f.text_field :serial_nr, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Make</strong></td>
+      <td> <%= f.text_field :make, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Model</strong></td>
+      <td> <%= f.text_area :model, :size=>"50" %></td>
+    </tr> 
+       
+    <tr>
+      <td><strong>Purchase Order</strong></td>
+      <td> <%= f.text_field :po, :size=>"50" %></td>
+    </tr>    
+    <tr>
+      <td><strong>Purchase Date</strong></td>
+      <td><%= f.date_field :po_date, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Price (€)</strong></td>
+      <td><%= f.text_field :price, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Lifecycle (months)</strong></td>
+      <td><%= f.collection_select :lifecycle, Asset::LIFECYLE_MONTHS, :to_i, :to_i, :include_blank => false  %></td>
+    </tr> 
+
+</table>    
+</div>  
+
+
   
    <% f.fields_for :transfers do |builder| %>
 	<h1> Works! </h1>
   <% end %>
-  
-  <div class="actions">
+<br>  
+  <div class="actions" align="center">
     <%= f.submit %>
   </div>
 <% end %>
