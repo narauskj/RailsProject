@@ -1,5 +1,5 @@
 class Asset < ActiveRecord::Base
-	has_many :transfers
+	has_many :transfers, :dependent => :destroy
 	accepts_nested_attributes_for :transfers
 	validates :asset_type, :asset_tag, :serial_nr, :make, :model, presence:true
 	validates :asset_tag, :serial_nr, uniqueness:true
@@ -12,7 +12,7 @@ class Asset < ActiveRecord::Base
 	LIFECYLE_MONTHS = ['12','24','36','48','60','72']
 	
 	def value
-		if self.price? & self.lifecycle?
+		if self.po_date? & self.price? & self.lifecycle?
 			((1-(((Time.now.year * 12 + Time.now.month)-(self.po_date.year * 12 + self.po_date.month)).to_f/self.lifecycle.to_i))*self.price.to_f).round(2)
 		else	
 		    '0'

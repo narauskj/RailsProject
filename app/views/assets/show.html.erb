@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Displaying asset <%= @asset.asset_tag  %></h1>
-<br>
-<br>
+
 
 <div class="table_normal">
 <table>
@@ -70,10 +69,38 @@
         
       
 </table>    
-</div>    
+</div>   
 
 <br>
 <div align=center>
 <%= link_to 'Edit', edit_asset_path(@asset) %> |
 <%= link_to 'Back', assets_path %>
 </div>
+<br>
+<% if @asset.transfers.last %>
+<h1>Historical record</h1>
+<div class="table_normal">
+
+<table>
+
+    <tr>
+      <td>Date</td>
+      <td>Asset</td>
+      <td>Employee</td>
+      <td>Location</td>
+      <td>Room</td>
+    </tr>
+	<% @asset.transfers.each do |transfer| %>
+      <tr>
+        <td><%= transfer.date %></td>
+        <td><%= transfer.asset.asset_tag %></td>
+        <td><%= transfer.employee.name %></td>
+        <td><%= transfer.location.site_code %></td>
+        <td><%= transfer.room %></td>
+      </tr>
+    <% end %>
+</table>
+</div>     
+<% end %>
+
+

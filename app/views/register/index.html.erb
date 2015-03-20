@@ -2,12 +2,5 @@
 <p>Find me in app/views/register/index.html.erb</p>
 
 <table cellpadding = "5" cellspacing = "0">
-<% for item in @registry %>
-	<tr valign="top">
-	
-	<td><% item.asset_type %></td>
-
-	<td><% item.asset_tag %></td>
-    </tr>
-<% end %>
+<%= @registry %>
 </table>   

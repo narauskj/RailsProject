@@ -1,4 +1,5 @@
 class Transfer < ActiveRecord::Base
+	
 	belongs_to :asset
 	belongs_to :location
     belongs_to :employee 

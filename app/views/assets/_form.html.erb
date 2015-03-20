@@ -44,7 +44,7 @@
     </tr>    
     <tr>
       <td><strong>Purchase Date</strong></td>
-      <td><%= f.date_field :po_date, :size=>"50" %></td>
+      <td><%= f.text_field :po_date%></td>
     </tr> 
     <tr>
       <td><strong>Price (€)</strong></td>
@@ -53,16 +53,29 @@
     <tr>
       <td><strong>Lifecycle (months)</strong></td>
       <td><%= f.collection_select :lifecycle, Asset::LIFECYLE_MONTHS, :to_i, :to_i, :include_blank => false  %></td>
-    </tr> 
-
+    </tr>
+    <tr>
+    	<td></td>
+    	<td></td>
+    </tr>
+    <%= f.fields_for :transfers do |builder| %>
+    <tr>
+      <td><strong>Assigned Employee</strong></td>
+      <td><%= builder.collection_select(:employee_id, Employee.all, :id, :name,{:prompt => 'Select'}) %></td>
+    </tr>
+    <tr>
+      <td><strong>Assigned Location</strong></td>
+      <td><%= builder.collection_select(:location_id, Location.all, :id, :site_code,{:prompt => 'Select'}) %></td>
+    </tr>
+    <tr>
+      <td><strong>Room/Desk location</strong></td>
+      <td><%= builder.text_field :room, :size=>"50" %></td>
+    </tr>
+    <%= builder.hidden_field :date, :value=> Time.now %>    
+    <% end %>
 </table>    
 </div>  
 
-
-  
-   <% f.fields_for :transfers do |builder| %>
-	<h1> Works! </h1>
-  <% end %>
 <br>  
   <div class="actions" align="center">
     <%= f.submit %>
