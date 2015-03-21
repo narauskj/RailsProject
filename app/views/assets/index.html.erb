@@ -42,7 +42,7 @@
         <td>€<%= number_with_precision(asset.value, :precision => 2) %></td>
         <td><%= asset.make %></td>
         <td><%= asset.model %></td>
-        <td><%= if asset.transfers.last 
+        <td><%= if asset.transfers.last  
         			'Yes' 
         		else 'No' 
         		end %></td>

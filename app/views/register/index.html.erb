@@ -2,5 +2,7 @@
 <p>Find me in app/views/register/index.html.erb</p>
 
 <table cellpadding = "5" cellspacing = "0">
-<%= @registry %>
+<% @assets.each do |item| %>
+	item.make
+<% end %>
 </table>   

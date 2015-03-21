@@ -69,6 +69,6 @@ class TransfersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transfer_params
-      params.require(:transfer).permit(:date, :asset_id, :employee_id, :location_id, :room)
+      params.require(:transfer).permit(:date, :asset_id, :employee_id, :location_id, :room, :user_id)
     end
 end

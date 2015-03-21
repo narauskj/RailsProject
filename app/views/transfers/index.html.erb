@@ -20,6 +20,7 @@
       <td>Employee</td>
       <td>Location</td>
       <td>Room</td>
+      <td>User</td>
       <td colspan="2">Actions</td>
     </tr>
 
@@ -32,6 +33,7 @@
         <td><%= transfer.employee.name %></td>
         <td><%= transfer.location.site_code %></td>
         <td><%= transfer.room %></td>
+        <td><%= transfer.user_id %></td>
         <td><%= link_to 'Show', transfer %></td>
         <td><%= link_to 'Del', transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

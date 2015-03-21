@@ -18,6 +18,16 @@ class Asset < ActiveRecord::Base
 		    '0'
 		end
 	end	
+	
+	def assigned
+		link = Transfers.find_by asset_id: self.id
+		if link?
+			true
+		else
+			false
+		end	
+	end
+	
 	def self.assignable_items
 		all
 	end		

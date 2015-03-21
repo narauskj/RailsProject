@@ -21,7 +21,7 @@ class AssetsController < ApplicationController
 
   # GET /assets/1/edit
   def edit
-  	@asset.transfers.build
+  	
   end
 
   # POST /assets
