@@ -1,0 +1,63 @@
+<h1>Various data and statistics</h1>
+
+
+  <% final_value = 0 %>
+  <% @assets.each do |asset| %>
+          <% if asset.lifecycle? and asset.po_date? and asset.price? %>
+              <% final_value = final_value + ((1- (( (Time.now.year * 12 + Time.now.month) - (asset.po_date.to_date.year * 12 + asset.po_date.to_date.month))).to_f/asset.lifecycle.to_f).to_f*asset.price).round(2)%>
+          <% end %>
+  <% end %>
+  <% if final_value > 0 %>
+
+  <h2>Total value of assets on the system</h2>
+      <p>€ <%= final_value.round(2) %></p>
+      </p>
+  <h2>Total price of assets on the system</h2>
+      <p>€ <%= @assets.sum(:price).round(2) %></p>
+  <h2>Total depreciation</h2>
+      <p><%= ((final_value.round(2)/@assets.sum(:price).round(2))*100).round(1) %>%</p>
+  <% end %>
+
+<br>
+<h2>Asset values per site</h2>
+  <div class="table_normal">
+    <table>
+        <tr>
+            <td>Site</td>
+            <td>Value</td>
+     </tr>
+    <% @locations.each do |location| %>
+        <tr>
+          <% iterator = 0 %>
+          <td><%= location.site_code %></td>
+          <td>€<% @data_value.each do |asset| %>
+            <% if asset.site_code == location.site_code %>
+                <% iterator= iterator.to_f + ((1- (( (Time.now.year * 12 + Time.now.month) - (asset.po_date.to_date.year * 12 + asset.po_date.to_date.month))).to_f/asset.lifecycle.to_f).to_f*asset.price).round(2)%>
+            <% end %>
+            <% end %>
+            <%= iterator.round(2)%></td>
+      <% end %>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td>€ <%= final_value.round(2) %></td>
+        </tr>
+</table>
+</div>
+<br>
+<h2>Types of assets in total</h2>
+<div class="table_normal">
+  <table>
+    <tr>
+      <td>Site</td>
+      <td>Value</td>
+    </tr>
+  <% num_of_devices = @assets.group(:asset_type).count %>
+  <% num_of_devices.each do |device| %>
+    <tr>
+        <td><b><%= device.first() %></b></td>
+        <td><%= device.second() %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

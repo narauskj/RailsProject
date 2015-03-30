@@ -1,0 +1,75 @@
+<h1>Report generator</h1>
+<div class='field'>
+  <%= search_form_for @q, url: search_reports_path, method: :post do |f| %>
+      <%= f.condition_fields do |c| %>
+          <%= render "condition_fields", f: c %>
+      <% end %>
+      <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+      </div>
+      <div class="field">
+        Sort:
+        <%= f.sort_fields do |s| %>
+            <%= s.sort_select %>
+        <% end %>
+      </div>
+      <div class="actions"><%= f.submit "Search" %></div>
+  <% end %>
+
+
+  <% final_value = 0 %>
+  <% @unique_assets.each do |asset| %>
+          <% if asset.lifecycle? and asset.po_date? and asset.price? %>
+              <% final_value = final_value + ((1- (( (Time.now.year * 12 + Time.now.month) - (asset.po_date.to_date.year * 12 + asset.po_date.to_date.month))).to_f/asset.lifecycle.to_f).to_f*asset.price).round(2)%>
+          <% end %>
+  <% end %>
+  <% if final_value > 0 %>
+  <H1>Total value of assets on the system</H1>
+      <p>€<%= final_value.round(2) %></p>
+  <% end %>
+
+
+
+  <div class="table_normal">
+  <table>
+    <tr>
+      <td>Type</td>
+      <td>Asset#</td>
+      <td>Serial#</td>
+      <td>PO</td>
+      <td>Date</td>
+      <td>Price</td>
+      <td>Lifecycle</td>
+      <td>Value</td>
+      <td>Make</td>
+      <td>Model</td>
+      <td>Employee</td>
+      <td>Location</td>
+
+    </tr>
+
+
+    <% @unique_assets.each do |asset| %>
+
+        <tr>
+          <td><%= asset.asset_type %></td>
+          <td><%= asset.asset_tag %></td>
+          <td><%= asset.serial_nr %></td>
+          <td><%= asset.po %></td>
+          <td><%= asset.date %></td>
+          <td>€ <%= number_with_precision(asset.price, :precision => 2) %></td>
+          <td><%= asset.lifecycle %></td>
+          <td>€<% if asset.lifecycle? and asset.po_date? and asset.price? %>
+                <%= ((1- (( (Time.now.year * 12 + Time.now.month) - (asset.po_date.to_date.year * 12 + asset.po_date.to_date.month))).to_f/asset.lifecycle.to_f).to_f*asset.price).round(2)%>
+                <% else %>
+                <%= "no data" %>
+            <% end %>
+
+          </td>
+          <td><%= asset.make %></td>
+          <td><%= asset.model %></td>
+          <td><%= asset.name %></td>
+          <td><%= asset.site_code %></td>
+        </tr>
+<% end %>
+</table>
+</div>

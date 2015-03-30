@@ -10,7 +10,8 @@ class Transfer < ActiveRecord::Base
 		CSV.foreach(file.path, headers: true) do |row|
 		Transfer.create! row.to_hash			
 		end
-	end	
+	end
+
 end
 
 

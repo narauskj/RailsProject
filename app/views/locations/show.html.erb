@@ -28,4 +28,28 @@
 <div align=center>
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
+
+<h1>Historical record</h1>
+<div class="table_normal">
+
+<table>
+
+    <tr>
+      <td>Date</td>
+      <td>Asset</td>
+      <td>Employee</td>
+      <td>Location</td>
+      <td>Room</td>
+    </tr>
+	<% @location.transfers.each do |transfer| %>
+      <tr>
+        <td><%= transfer.date %></td>
+        <td><%= transfer.asset.asset_tag %></td>
+        <td><%= transfer.employee.name %></td>
+        <td><%= transfer.location.site_code %></td>
+        <td><%= transfer.room %></td>
+      </tr>
+    <% end %>
+</table>
+</div>
 </div>

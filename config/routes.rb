@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 	
-  resources :reports
+  resources :reports do
+      collection { post :search, to: 'reports#index'}
+  end
    
   resources :employees do
   		collection { post :import }
