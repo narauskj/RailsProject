@@ -6,13 +6,12 @@ class ReportsController < ApplicationController
     @employees = Employee.all
     @locations = Location.all
     @data_value = Asset.joins("inner join transfers on transfers.asset_id = assets.id inner join locations on transfers.location_id = locations.id").select("assets.id, assets.po_date, assets.price, assets.lifecycle, max(locations.site_code) as site_code").group("assets.id, assets.po_date, assets.price, assets.lifecycle")
-		@all_transfers = Transfer.joins("inner join assets on assets.id = transfers.asset_id inner join employees on employees.id = transfers.employee_id inner join locations on locations.id = transfers.location_id").select("assets.*, employees.*, locations.*, transfers.*")
+    @critical_assets = Asset.joins("inner join transfers on transfers.asset_id = assets.id inner join locations on transfers.location_id = locations.id").select("assets.asset_tag, assets.serial_nr, assets.po, assets.po_date, assets.lifecycle, assets.make, assets.model, max(locations.site_code) as site_code").group("assets.asset_tag, assets.serial_nr, assets.po, assets.po_date, assets.lifecycle, assets.make, assets.model").where("assets.priority = 'Critical'")
 
-    @test_set = Asset.joins(:transfers).select("DISTINCT assets.id, assets.asset_tag, MAX(transfers.location_id)")
-
-    @q = @all_transfers.ransack(params[:q])
+    @q = @assets.ransack(params[:q])
     @unique_assets = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 50)
-		#code for showing aging assets per site 
+		#code for showing aging assets per site
+    @unasigned_assets = Asset.where("assets.id NOT IN (SELECT asset_id FROM transfers)")
 
 	end	
 	

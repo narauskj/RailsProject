@@ -1,6 +1,4 @@
 <h1>Various data and statistics</h1>
-
-
   <% final_value = 0 %>
   <% @assets.each do |asset| %>
           <% if asset.lifecycle? and asset.po_date? and asset.price? %>
@@ -9,13 +7,14 @@
   <% end %>
   <% if final_value > 0 %>
 
-  <h2>Total value of assets on the system</h2>
-      <p>€ <%= final_value.round(2) %></p>
-      </p>
-  <h2>Total price of assets on the system</h2>
-      <p>€ <%= @assets.sum(:price).round(2) %></p>
-  <h2>Total depreciation</h2>
-      <p><%= ((final_value.round(2)/@assets.sum(:price).round(2))*100).round(1) %>%</p>
+
+  <p><b>Total value of assets on the system: </b>
+     €<%= final_value.round(2) %></p>
+
+  <p><b>Total price of assets on the system: </b>
+      €<%= @assets.sum(:price).round(2) %></p>
+  <p><b>Total depreciation: </b>
+      <%= ((final_value.round(2)/@assets.sum(:price).round(2))*100).round(1) %>%</p>
   <% end %>
 
 <br>
@@ -49,8 +48,8 @@
 <div class="table_normal">
   <table>
     <tr>
-      <td>Site</td>
-      <td>Value</td>
+      <td>Asset type</td>
+      <td>Count</td>
     </tr>
   <% num_of_devices = @assets.group(:asset_type).count %>
   <% num_of_devices.each do |device| %>
@@ -60,4 +59,66 @@
     </tr>
     <% end %>
   </table>
+</div>
+<% if @unasigned_assets.any? %>
+    <br>
+    <h2>Unassigned assets</h2>
+    <div class="table_normal">
+      <table>
+        <tr>
+          <td>Asset#</td>
+          <td>Serial#</td>
+          <td>Make</td>
+          <td>Model</td>
+          <td>Date</td>
+        </tr>
+        <% @unasigned_assets.each do |asset| %>
+        <tr>
+            <td> <%= asset.asset_tag %></td>
+            <td> <%= asset.serial_nr %></td>
+            <td> <%= asset.make %></td>
+            <td> <%= asset.model %></td>
+            <td> <%= asset.po_date %></td>
+        </tr>
+   <% end %>
+   </table>
+   </div>
+<% end %>
+<br>
+
+<h2>Critical assets getting EOL</h2>
+    <div class="table_normal">
+      <table>
+        <tr>
+          <td>Asset#</td>
+          <td>Serial#</td>
+          <td>Make</td>
+          <td>Model</td>
+          <td>Date</td>
+          <td>Lifecycle</td>
+          <td>EOL date</td>
+        </tr>
+
+    <% @critical_assets.each do |asset| %>
+        <% if asset.po_date? and asset.lifecycle? %>
+
+                <% a = asset.po_date.year * 12 + asset.po_date.month + asset.lifecycle %>
+                <% b = Time.now.year * 12 + Time.now.month %>
+
+                <% if (a - b) < 12 %>
+                    <tr>
+                        <td><%= asset.asset_tag %></td>
+                        <td><%= asset.serial_nr %></td>
+                        <td><%= asset.make %></td>
+                        <td><%= asset.model %></td>
+                        <td><%= asset.po_date %></td>
+                        <td><%= asset.lifecycle %></td>
+                        <td><%= asset.po_date + asset.lifecycle.months%></td>
+                    </tr>
+                <% end %>
+
+        <% end %>
+
+    <% end %>
+    </table>
 </div>
