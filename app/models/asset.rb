@@ -10,6 +10,7 @@ class Asset < ActiveRecord::Base
 		
 	ASSET_TYPES = ['Laptop','Desktop','Server','Monitor','UPS','Battery','Switch']
 	LIFECYLE_MONTHS = ['12','24','36','48','60','72']
+	PRIORITY_LEVELS = ['Normal','High','Critical']
 	
 	def value
 		if self.po_date? & self.price? & self.lifecycle?
@@ -28,7 +29,20 @@ class Asset < ActiveRecord::Base
 		end	
 	end
 	
-	def self.assignable_items
-		all
+	def self.to_csv
+		CSV.generate do |csv|
+			csv << column_names
+			all.each do |item|
+				csv << item.attributes.values
+			end
+		end		
+	end
+	
+	def self.import(file)
+		CSV.foreach(file.path, headers: true) do |row|
+		Asset.create! row.to_hash			
+		end
 	end		
+
+
 end

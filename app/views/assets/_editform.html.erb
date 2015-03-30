@@ -20,7 +20,12 @@
     <tr>
       <td><strong><%= f.label :asset_type %></strong></td>
       <td> <%= f.collection_select :asset_type, Asset::ASSET_TYPES, :to_s, :to_s, :include_blank => false %></td>
-    </tr>      
+    </tr>   
+    <tr>
+      <td><strong>Priority</strong></td>
+      <td> <%= f.collection_select :priority, Asset::PRIORITY_LEVELS, :to_s, :to_s, :include_blank => false %></td>
+    </tr>   
+       
     <tr>
       <td><strong>Asset #</strong></td>
       <td> <%= f.text_field :asset_tag, :size=>"50" %></td>
@@ -54,10 +59,7 @@
       <td><strong>Lifecycle (months)</strong></td>
       <td><%= f.collection_select :lifecycle, Asset::LIFECYLE_MONTHS, :to_i, :to_i, :include_blank => false  %></td>
     </tr>
-    <tr>
-    	<td></td>
-    	<td></td>
-    </tr>
+
 </table>    
 </div>  
 

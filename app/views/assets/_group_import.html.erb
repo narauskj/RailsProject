@@ -1,0 +1,83 @@
+<%= form_for(@asset) do |f| %>
+  <% if @asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@asset.errors.count, "error") %> prohibited this asset from being saved:</h2>
+
+      <ul>
+      <% @asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Parameter</td>
+      <td>Value</td>     
+    </tr>
+    <tr>
+      <td><strong><%= f.label :asset_type %></strong></td>
+      <td> <%= f.collection_select :asset_type, Asset::ASSET_TYPES, :to_s, :to_s, :include_blank => false %></td>
+    </tr>      
+    <tr>
+      <td><strong>Asset #</strong></td>
+      <td> <%= f.text_field :asset_tag, :size=>"50" %></td>
+    </tr>    
+    <tr>
+      <td><strong>Serial #</strong></td>
+      <td> <%= f.text_field :serial_nr, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Make</strong></td>
+      <td> <%= f.text_field :make, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Model</strong></td>
+      <td> <%= f.text_area :model, :size=>"50" %></td>
+    </tr> 
+       
+    <tr>
+      <td><strong>Purchase Order</strong></td>
+      <td> <%= f.text_field :po, :size=>"50" %></td>
+    </tr>    
+    <tr>
+      <td><strong>Purchase Date</strong></td>
+      <td><%= f.text_field :po_date%></td>
+    </tr> 
+    <tr>
+      <td><strong>Price (€)</strong></td>
+      <td><%= f.text_field :price, :size=>"50" %></td>
+    </tr> 
+    <tr>
+      <td><strong>Lifecycle (months)</strong></td>
+      <td><%= f.collection_select :lifecycle, Asset::LIFECYLE_MONTHS, :to_i, :to_i, :include_blank => false  %></td>
+    </tr>
+    <tr>
+    	<td></td>
+    	<td></td>
+    </tr>
+    <%= f.fields_for :transfers do |builder| %>
+    <tr>
+      <td><strong>Assigned Employee</strong></td>
+      <td><%= builder.collection_select(:employee_id, Employee.all, :id, :name,{:prompt => 'Select'}) %></td>
+    </tr>
+    <tr>
+      <td><strong>Assigned Location</strong></td>
+      <td><%= builder.collection_select(:location_id, Location.all, :id, :site_code,{:prompt => 'Select'}) %></td>
+    </tr>
+    <tr>
+      <td><strong>Room/Desk location</strong></td>
+      <td><%= builder.text_field :room, :size=>"50" %></td>
+    </tr>
+    <%= builder.hidden_field :date, :value=> Time.now %>    
+    <% end %>
+</table>    
+</div>  
+
+<br>  
+  <div class="actions" align="center">
+    <%= f.submit %>
+  </div>
+<% end %>

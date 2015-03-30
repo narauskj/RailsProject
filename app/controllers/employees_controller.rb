@@ -20,6 +20,11 @@ class EmployeesController < ApplicationController
   # GET /employees/1/edit
   def edit
   end
+  
+  def import
+      Employee.import(params[:file])
+      redirect_to '/employees', notice: "Employees imported from CSV file"
+  end
 
   # POST /employees
   # POST /employees.json

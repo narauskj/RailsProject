@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Assets</h1>
+<br>
+
+<%= form_tag assets_path, :action => 'search', :method => 'get' do %>
+	<p>
+		<%= text_field_tag :search, params[:search], :id => 'search_field' %>
+		<%= submit_tag "Search", :name => nil %>
+	</p>
+<% end %>
+
+<%= link_to 'New Asset', new_asset_path %>
+<br>
+<%= link_to 'Download CSV', assets_path(format: "csv") %>
+<br>
+<div class='flickr_pagination'>
+<%= will_paginate @assets %>
+<br>
+</div>
+
+<div class="table_normal">
+<table>
+    <tr>
+      <td>Type</td>
+      <td>Asset #</td>
+      <td>Serial #</td>
+      <td>PO</td>
+      <td>Date</td>
+      <td>Price</td>
+      <td>Lifecycle</td>
+      <td>Value</td>
+      <td>Make</td>
+      <td>Model</td>
+      <td>Assigned?</td>
+      <td>Employee</td>
+	  <td>Location</td>
+      <td colspan="3">Actions</td>
+    </tr>
+
+
+    <% @assets.each do |asset| %>
+      <tr>
+        <td><%= asset.asset_type %></td>
+        <td><%= asset.asset_tag %></td>
+        <td><%= asset.serial_nr %></td>
+        <td><%= asset.po %></td>
+        <td><%= asset.po_date %></td>
+        <td>€<%= number_with_precision(asset.price, :precision => 2) %></td>
+        <td><%= asset.lifecycle %></td>
+        <td>€<%= number_with_precision(asset.value, :precision => 2) %></td>
+        <td><%= asset.make %></td>
+        <td><%= asset.model %></td>
+        <td><%= if asset.transfers.last  
+        			'Yes' 
+        		else 'No' 
+        		end %></td>
+        <td><%= if asset.transfers.last 
+        			asset.transfers.last.employee.name 
+        		else 'N/A' 
+        		end %></td>
+        <td><%= if asset.transfers.last 
+        			asset.transfers.last.location.site_code 
+        		else 'N/A' 
+        		end %></td>		
+        <td><%= link_to 'Show', asset %></td>
+        <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
+        <td><%= link_to 'Del', asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  
+</table>
+</div>
+<br>
+<div class='flickr_pagination'>
+<%= will_paginate @assets %>
+<br>
+</div>
+
+<%= link_to 'New Asset', new_asset_path %>
+
+<h2> Import assets </h2>
+<%= form_tag import_assets_path, multipart:true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import" %>
+<% end %>

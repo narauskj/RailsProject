@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321121603) do
+ActiveRecord::Schema.define(version: 20150321131224) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "asset_type"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150321121603) do
     t.boolean  "is_supported"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "priority"
   end
 
   create_table "employees", force: :cascade do |t|

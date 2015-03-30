@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<h1> Displaying employee <%= @employee.name %> </h1>
 <div class="table_normal">
 <table>
     <tr>
@@ -31,4 +32,28 @@
 <div align=center>
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>
+</div>
+</br>
+<h1>Historical record</h1>
+<div class="table_normal">
+
+<table>
+
+    <tr>
+      <td>Date</td>
+      <td>Asset</td>
+      <td>Employee</td>
+      <td>Location</td>
+      <td>Room</td>
+    </tr>
+	<% @employee.transfers.each do |transfer| %>
+      <tr>
+        <td><%= transfer.date %></td>
+        <td><%= transfer.asset.asset_tag %></td>
+        <td><%= transfer.employee.name %></td>
+        <td><%= transfer.location.site_code %></td>
+        <td><%= transfer.room %></td>
+      </tr>
+    <% end %>
+</table>
 </div>

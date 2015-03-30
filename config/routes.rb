@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
-  get 'register/index'
- 
-  resources :employees
-
+	
+  resources :reports
+   
+  resources :employees do
+  		collection { post :import }
+  end
+  
   resources :locations
 
-  resources :assets
+  resources :assets do
+  		collection { post :import }
+  		collection { post :search, to: 'assets#index' } 
+  end
   resources :registers
   devise_for :users
-  resources :transfers
+  resources :transfers do
+  		collection { post :import }
+  end
   
-  root :to => redirect('/transfers')
+  root :to => redirect('/assets')
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

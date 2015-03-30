@@ -2,9 +2,30 @@
 
 <h1>Listing Assets</h1>
 <br>
+<div class='field'>
+<%= search_form_for @q, url: search_assets_path, method: :post do |f| %>
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+</div> 
+  <div class="field">
+    Sort:
+    <%= f.sort_fields do |s| %>
+      <%= s.sort_select %>
+    <% end %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+
 
 <%= link_to 'New Asset', new_asset_path %>
 <br>
+<%= link_to 'Download CSV', assets_path(format: "csv") %>
+<br>
+
+
 <div class='flickr_pagination'>
 <%= will_paginate @assets %>
 <br>
@@ -14,8 +35,8 @@
 <table>
     <tr>
       <td>Type</td>
-      <td>Asset #</td>
-      <td>Serial #</td>
+      <td>Asset#</td>
+      <td>Serial#</td>
       <td>PO</td>
       <td>Date</td>
       <td>Price</td>
@@ -69,3 +90,9 @@
 </div>
 
 <%= link_to 'New Asset', new_asset_path %>
+
+<h2> Import assets </h2>
+<%= form_tag import_assets_path, multipart:true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import" %>
+<% end %>

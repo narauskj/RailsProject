@@ -20,6 +20,10 @@ class TransfersController < ApplicationController
   # GET /transfers/1/edit
   def edit
   end
+  def import
+      Transfer.import(params[:file])
+      redirect_to '/transfers', notice: "Transfers imported from CSV file"
+  end
 
   # POST /transfers
   # POST /transfers.json

@@ -47,4 +47,9 @@
 <br>
 </div>
 
+<h2> Import transfer </h2>
+<%= form_tag import_transfers_path, multipart:true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import" %>
+<% end %>
 <%= link_to 'New Transfer', new_transfer_path %>

@@ -41,5 +41,8 @@
 <%= will_paginate @employees %>
 <br>
 </div>
-
+<%= form_tag import_employees_path, multipart:true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import" %>
+<% end %>
 <%= link_to 'New Employee', new_employee_path %>

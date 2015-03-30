@@ -1,5 +1,5 @@
 class RegisterController < ApplicationController
-  before_action :set_register, only: [:show, :edit, :update, :destroy]
+  before_action :set_asset, only: [:show, :edit, :update, :destroy]
 
   # GET /assets
   # GET /assets.json
